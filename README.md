@@ -55,3 +55,101 @@
 ---
 
 # Accessing S3 using AWS CLI
+
+### **Setting Up AWS CLI for Accessing S3 Buckets**
+
+1. **Install AWS CLI**:
+   - Go to the [AWS CLI official website](https://aws.amazon.com/cli/) to download the appropriate version for your operating system (Windows, MacOS, Linux).
+   - Once installed, verify the installation by running the command:
+     ```
+     aws --version
+     ```
+
+2. **Configure AWS CLI**:
+   - To authenticate with your AWS account, use the following command:
+     ```
+     aws configure
+     ```
+   - Enter the following details:
+     - **Access Key**: Obtain this from your AWS account under "Security Credentials."
+     - **Secret Key**: This is generated alongside the Access Key.
+     - **Region**: Specify the region you are working in (e.g., `eu-central-1` for Frankfurt).
+
+3. **Verify Configuration**:
+   - To ensure the AWS CLI is configured correctly, use the following command to check the current user and account:
+     ```
+     aws sts get-caller-identity
+     ```
+
+---
+
+### **Basic AWS CLI Commands for S3**
+
+1. **List All S3 Buckets**:
+   - Use the `aws s3 ls` command to list all the S3 buckets in your AWS account:
+     ```
+     aws s3 ls
+     ```
+
+2. **List the Contents of a Specific Bucket**:
+   - To view the contents inside a specific S3 bucket, use the following command:
+     ```
+     aws s3 ls s3://<bucket-name>
+     ```
+   - Example:
+     ```
+     aws s3 ls s3://test-bucket-demo-jook-30-august
+     ```
+
+---
+
+### **Advanced AWS CLI Commands for S3 Operations**
+
+1. **Move or Copy an Object Between Buckets**:
+   - **Move an Object**: The command `aws s3 mv` is used to move an object from one bucket to another.
+     - Syntax:
+       ```
+       aws s3 mv s3://<source-bucket>/<object-name> s3://<destination-bucket>/<object-name>
+       ```
+     - Example:
+       ```
+       aws s3 mv s3://test-bucket-demo-jook-30-august/object2 s3://destination-bucket/object2
+       ```
+
+2. **Verify Object Movement**:
+   - After performing the move, check the **destination bucket** to ensure the object has been transferred.
+   - You can refresh the AWS S3 GUI to see the moved object listed in the new bucket.
+
+---
+
+### **Listing All Objects Recursively Within a Bucket**
+
+1. **List All Content Recursively**:
+   - To list all objects, including those in subfolders within the bucket, use the `--recursive` option.
+   - Syntax:
+     ```
+     aws s3 ls s3://<bucket-name> --recursive
+     ```
+   - Example:
+     ```
+     aws s3 ls s3://my-s3-bucket --recursive
+     ```
+   - This command will list not only the direct objects but also those inside subfolders.
+
+---
+
+### **Additional AWS CLI Resources**
+
+- For more AWS CLI commands and details, you can refer to the **blog post** that will contain all the commands.
+- Example resource URL for reference: [AWS CLI Commands Blog Post](#)
+
+---
+
+### **Summary of Key Operations**
+
+- **AWS CLI Setup**: Install, configure, and authenticate AWS CLI.
+- **Basic S3 Commands**: List buckets (`aws s3 ls`) and view contents (`aws s3 ls s3://bucket-name`).
+- **Advanced Operations**: Move (`aws s3 mv`) or copy objects between buckets.
+- **Recursive Listing**: Use `--recursive` to list all objects in a bucket, including those in subfolders.
+
+
