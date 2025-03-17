@@ -11,7 +11,7 @@
 
 ---
 
-### **AWS S3 Key Concepts**
+## **AWS S3 Key Concepts**
 
 - **S3 Buckets**:
   - You create a bucket to store objects in S3.
@@ -33,7 +33,7 @@
 
 ---
 
-### **AWS S3: Object-based Storage**
+## **AWS S3: Object-based Storage**
 
 1. **Object vs. File**:
    - S3 stores files as **objects** rather than regular files. 
@@ -102,7 +102,7 @@
   
 ---
 
-### **Scalability and Durability of S3 Buckets**
+## **Scalability and Durability of S3 Buckets**
 
 1. **Availability of Data**:
    - **AWS S3 Promise**: AWS promises **99.99% availability**, which is achieved with **11 nines** (99.999999999%) behind that decimal.
@@ -121,7 +121,7 @@
 
 ---
 
-### **S3 Bucket Rules and Policies**
+## **S3 Bucket Rules and Policies**
 
 1. **Unique Bucket Name**:
    - **Bucket Name Uniqueness**: 
@@ -138,8 +138,47 @@
      - Each object uploaded to S3 can be up to **5 terabytes (TB)** in size.
      - This means you can store large files, such as videos or databases, as a single object in S3.
    - **Multiple Large Objects**: You can upload **multiple objects** of up to 5 TB each in your S3 bucket.
+  
+---
+## **AWS S3 Storage Classes**  
+
+| Storage Class | Use Case | Durability | Availability | Retrieval Time | Cost |
+|--------------|----------|------------|--------------|---------------|------|
+| **S3 Standard** | Frequently accessed data (e.g., dynamic web apps, databases) | 99.999999999% (11 nines) | 99.99% | Immediate | High |
+| **S3 Intelligent-Tiering** | Unpredictable access patterns | 11 nines | 99.9% | Immediate | Moderate |
+| **S3 Standard-IA (Infrequent Access)** | Infrequently accessed data, but requires fast retrieval | 11 nines | 99.9% | Immediate | Lower than Standard |
+| **S3 One Zone-IA** | Infrequently accessed data stored in a single Availability Zone | 11 nines | 99.5% | Immediate | Lower than Standard-IA |
+| **S3 Glacier Instant Retrieval** | Archive data with immediate access | 11 nines | 99.9% | Immediate | Very Low |
+| **S3 Glacier Flexible Retrieval** | Long-term archiving, minutes to hours retrieval | 11 nines | 99.9% | 1 minute to 12 hours | Very Low |
+| **S3 Glacier Deep Archive** | Cheapest option for archival data; retrieval takes hours | 11 nines | 99.9% | 12–48 hours | Lowest |
+
+### **S3 Storage Pricing and Cost Optimization**  
+- **S3 Standard is the most expensive** because it supports frequent access and high durability.  
+- **S3 Glacier & Deep Archive are the cheapest** as they are designed for archival data.  
+- **Graphical Cost Comparison:**  
+  - **Left Side (Higher Cost):** S3 Standard, Standard-IA.  
+  - **Right Side (Lower Cost):** Glacier, Glacier Flexible Retrieval, Deep Archive.
+
+### **AWS S3 Cost Calculator**  
+AWS provides an official **S3 Cost Calculator** to estimate costs based on:  
+- **Storage Class Selection** (Standard, IA, Glacier, etc.).  
+- **Data Volume (in GB or TB).**  
+- **Operations Performed** (PUT, COPY, DELETE).  
+- **Data Transfer Costs.**  
+
+### **Example Cost Comparison:**  
+- **S3 Standard (1,000GB/month):** ≈ **$23/month**  
+- **S3 Glacier Instant Retrieval (1,000GB/month):** ≈ **$4/month**  
+
+This shows a significant cost reduction when using Glacier for archival data.
+
+### **AWS S3 Requester Pays Feature**  
+- **Concept:** Normally, the bucket owner pays for data transfer costs.  
+- **Requester Pays Option:** The **user accessing the data (requester) pays the retrieval cost.**  
+- **Use Case:** If an external user needs access to your S3 data, they bear the cost of data transfer.
 
 ---
+
 
 
 
