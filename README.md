@@ -49,9 +49,6 @@
 
 ### **S3 Bucket Creation Process**
 
-<details>
-  <summary>S3 Bucket Creation</summary>
-
 1. **Navigating to S3 Dashboard**:
    - After logging into AWS, use the **search bar** to search for "S3" and click the **S3 icon** to go to the S3 dashboard.
 
@@ -81,12 +78,8 @@
 3. **Finalizing the Bucket Creation**:
    - After configuring your options, click the **Create** button. AWS will confirm that your bucket has been successfully created.
    - You can now see your newly created bucket in the S3 dashboard.
-  
-</details>
 
 ### **Uploading Objects to S3 Bucket**
-<details>
-  <summary>Uploading Objects to S3 Bucket</summary>
 
 1. **Navigating to the Bucket**:
    - In the S3 dashboard, select your bucket to view and manage its contents.
@@ -107,9 +100,47 @@
    - Once the files are uploaded, they will appear in the **object browser** of your bucket.
    - You can now manage and access the objects via their unique reference IDs (URLs).
   
-</details>
+---
+
+### **Scalability and Durability of S3 Buckets**
+
+1. **Availability of Data**:
+   - **AWS S3 Promise**: AWS promises **99.99% availability**, which is achieved with **11 nines** (99.999999999%) behind that decimal.
+   - This means the data you store in S3 is **highly available** when you need it.
+   - **Availability**: S3 guarantees 99.99% availability by storing your data across multiple availability zones.
+
+2. **How AWS Ensures Data Availability**:
+   - **Multiple Availability Zones**:
+     - AWS stores your data across **three different availability zones** (AZs) within a region.
+     - In the **Frankfurt region** (as an example), your data is distributed across three separate data centers:
+       - **Availability Zone 1**
+       - **Availability Zone 2**
+       - **Availability Zone 3**
+     - **Redundancy**: This setup ensures that even if one data center or AZ goes down, your data is still accessible from the other two zones.
+     - **Result**: This architecture ensures **high availability** and durability of your data.
 
 ---
+
+### **S3 Bucket Rules and Policies**
+
+1. **Unique Bucket Name**:
+   - **Bucket Name Uniqueness**: 
+     - S3 bucket names must be **globally unique**. If the name you want is already taken, you must come up with a different one.
+     - Even though S3 is a regional service, the bucket name must be unique across all AWS accounts globally.
+
+2. **Buckets are Region-Specific**:
+   - **Regional Resource**: Once you create a bucket, it is **associated with a specific region** (e.g., Frankfurt region).
+   - **Bucket Creation**: If you want to create a bucket in a different region, you must choose that region before creating the bucket.
+   - Example: If you created a bucket in **Frankfurt**, it is tied to that specific region.
+
+3. **Object Size Limit**:
+   - **Maximum Object Size**: 
+     - Each object uploaded to S3 can be up to **5 terabytes (TB)** in size.
+     - This means you can store large files, such as videos or databases, as a single object in S3.
+   - **Multiple Large Objects**: You can upload **multiple objects** of up to 5 TB each in your S3 bucket.
+
+---
+
 
 
   
