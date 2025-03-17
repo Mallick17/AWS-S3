@@ -179,9 +179,61 @@ This shows a significant cost reduction when using Glacier for archival data.
 - **Requester Pays Option:** The **user accessing the data (requester) pays the retrieval cost.**  
 - **Use Case:** If an external user needs access to your S3 data, they bear the cost of data transfer.
 - **Benefit:** The bucket owner only pays for **storage**, while the requester bears retrieval costs.
+  
 ---
 
+## **AWS S3 Object Tagging**   
+- Amazon S3 allows storing objects up to **5TB** in size.  
+- Each object in S3 is uniquely identified by AWS, but **custom tags** can be assigned.  
+- Object tagging is useful for **organizing, managing, and categorizing** objects in an S3 bucket using **key-value pairs**.
+- Tags are **key-value pairs** that help in grouping and filtering objects.   
+
+### **2. Why Use Object Tagging?**  
+- **Efficient Object Management**: Helps categorize and organize objects.  
+- **Facilitates Data Movement**: Move specific objects between buckets using tags.  
+- **Reporting & Cost Allocation**: Track storage costs based on tags.  
+- **Security & Compliance**: Apply access policies based on tags.  
+- **Automation**: Helps in lifecycle policies and workflow management.  
 
 
+### **3. Object Tagging Features**  
+- **Maximum of 10 tags per object.**  
+- **Key-Value Format:** Example: `Key: ObjectType, Value: PNG`.  
+- **Editable Anytime:** Tags can be added, modified, or deleted.  
+- **Supports AWS Services:** Used in AWS Lambda, S3 Lifecycle rules, Cost Allocation, etc.
+- - **Supports filtering, cost tracking, automation, and access control**.    
+
+
+### **4. Practical Use Case: Moving Tagged Objects Between Buckets**  
+#### **Scenario**  
+- **Account 1 (Source Bucket)** contains multiple objects.  
+- **Account 2 (Destination Bucket)** should receive only objects tagged as `ProjectX`.  
+
+<details>
+  <summary>Steps to Move Objects Using Tags</summary>
+
+#### **Steps to Move Objects Using Tags**  
+1. **Apply Tags to Objects in the Source Bucket**  
+   - Assign a tag like `ProjectX` to the required objects.  
+2. **List Objects with Specific Tags Using AWS CLI**  
+   ```sh
+   aws s3api list-objects --bucket SourceBucket --query "Contents[?Tagging=='ProjectX']"
+   ```  
+3. **Copy Tagged Objects to Destination Bucket**  
+   ```sh
+   aws s3 cp s3://SourceBucket s3://DestinationBucket --recursive --exclude "*" --include "Tagging=='ProjectX'"
+   ```  
+4. **Verify the Object Transfer in the Destination Bucket**.  
+
+</details>
+
+### **5. Real-World Applications of Object Tagging**  
+✔ **Data Categorization**: Assign tags like `JPEG`, `CSV`, `LOG` for easy identification.  
+✔ **Cost Management**: AWS billing can track costs based on object tags.  
+✔ **Security Policies**: Restrict access based on tags in IAM policies.  
+✔ **Automated Workflows**: S3 Lifecycle rules can archive or delete objects based on tags.  
+✔ **Auditing & Compliance**: Helps track and manage sensitive data. 
+
+---
 
   
