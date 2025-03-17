@@ -152,7 +152,9 @@
 | **S3 Glacier Flexible Retrieval** | Long-term archiving, minutes to hours retrieval | 11 nines | 99.9% | 1 minute to 12 hours | Very Low |
 | **S3 Glacier Deep Archive** | Cheapest option for archival data; retrieval takes hours | 11 nines | 99.9% | 12–48 hours | Lowest |
 
-### **S3 Storage Pricing and Cost Optimization**  
+---
+
+## **S3 Storage Pricing and Cost Optimization**  
 - **S3 Standard is the most expensive** because it supports frequent access and high durability.  
 - **S3 Glacier & Deep Archive are the cheapest** as they are designed for archival data.  
 - **Graphical Cost Comparison:**  
