@@ -181,6 +181,134 @@
      
 ---
 
+# Securing Your S3 Bucket
+
+## Overview
+1. **S3 Server-Side Encryption (SSE-S3)**
+2. **S3 Encryption Using AWS KMS Key (SSE-KMS)**
+3. **In-Transit Encryption (HTTPS Enforcement)**
+4. **S3 Bucket Versioning**
+5. **S3 Bucket Replication Job**
+
+---
+
+## 1. S3 Server-Side Encryption (SSE-S3)
+
+### **Concept**
+SSE-S3 is the default encryption provided by AWS S3, which encrypts all objects stored in a bucket using AES-256 encryption.
+
+### **Enabling SSE-S3 for an Existing Bucket**
+1. Navigate to the **AWS S3 Dashboard**.
+2. Select the bucket you want to enable encryption for.
+3. Click on the **Properties** tab.
+4. Locate **Default Encryption** and click **Edit**.
+5. Choose **Server-side encryption with Amazon S3-managed keys (SSE-S3)**.
+6. Click **Save Changes**.
+
+### **Enabling SSE-S3 During Bucket Creation**
+1. Go to the **AWS S3 Dashboard**.
+2. Click **Create bucket**.
+3. Provide a **Bucket name** and other details.
+4. Scroll down to **Default encryption**.
+5. Select **SSE-S3**.
+6. Click **Create bucket**.
+
+---
+
+## 2. S3 Encryption Using AWS KMS Key (SSE-KMS)
+
+### **Concept**
+SSE-KMS allows you to use your own **AWS Key Management Service (KMS) keys** for encrypting objects in S3.
+
+### **Enabling SSE-KMS for an Existing Bucket**
+1. Navigate to **AWS S3 Dashboard**.
+2. Select the bucket.
+3. Click on the **Properties** tab.
+4. Find **Default Encryption** and click **Edit**.
+5. Select **Server-side encryption with AWS KMS key (SSE-KMS)**.
+6. If you have an existing KMS key, select it; otherwise, click **Create KMS key**.
+7. Click **Save Changes**.
+
+### **Creating a New KMS Key**
+1. Navigate to **AWS KMS**.
+2. Click **Create key**.
+3. Select **Symmetric key** and click **Next**.
+4. Define a **Key alias** and add key administrators.
+5. Click **Create key**.
+6. Copy the **Key ARN** and paste it into the S3 bucket’s encryption settings.
+
+---
+
+## 3. In-Transit Encryption (HTTPS Enforcement)
+
+### **Concept**
+In-transit encryption ensures that data transferred between clients and S3 is encrypted using HTTPS instead of HTTP.
+
+### **Enforcing HTTPS in S3 Bucket Policy**
+1. Go to the **AWS S3 Dashboard**.
+2. Select your bucket and navigate to **Permissions**.
+3. Click **Edit** under **Bucket policy**.
+4. Add the following policy:
+   ```json
+   {
+       "Id": "EnforceHTTPS",
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "DenyHTTP",
+               "Effect": "Deny",
+               "Principal": "*",
+               "Action": "s3:GetObject",
+               "Resource": "arn:aws:s3:::your-bucket-name/*",
+               "Condition": {
+                   "Bool": {
+                       "aws:SecureTransport": "false"
+                   }
+               }
+           }
+       ]
+   }
+   ```
+5. Click **Save Changes**.
+6. Now, objects can only be accessed using HTTPS.
+
+---
+
+## 4. S3 Bucket Versioning
+
+### **Concept**
+Bucket versioning maintains multiple versions of an object, enabling data recovery if an object is deleted or modified.
+
+### **Enabling Versioning on an Existing Bucket**
+1. Go to **AWS S3 Dashboard**.
+2. Select your bucket and navigate to **Properties**.
+3. Click **Edit** under **Bucket versioning**.
+4. Toggle **Enable**.
+5. Click **Save Changes**.
+
+### **Verifying Object Versioning**
+1. Upload an object to the bucket.
+2. Modify and upload the object again with the same name.
+3. Click on the object and check the **Versions** tab.
+4. You will see multiple versions of the object.
+
+---
+
+## 5. S3 Bucket Replication
+
+### **Concept**
+Bucket replication copies objects from a source bucket to a destination bucket in another AWS region.
+
+### **Steps to Enable Replication**
+1. Create a **destination bucket** in another region.
+2. Go to **AWS S3 Dashboard** and select the **source bucket**.
+3. Navigate to **Management** and click **Create replication rule**.
+4. Provide a **Rule name** and select the **Destination bucket**.
+5. Choose an existing **IAM role** or create a new one for replication.
+6. Click **Save rule**.
+7. Now, all new objects uploaded to the source bucket will be replicated to the destination bucket.
+
+---
 # Accessing S3 using AWS CLI
 
 ### **Setting Up AWS CLI for Accessing S3 Buckets**
