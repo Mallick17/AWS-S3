@@ -51,6 +51,17 @@
 4. **Post-Upload**:
    - Once the files are uploaded, they will appear in the **object browser** of your bucket.
    - You can now manage and access the objects via their unique reference IDs (URLs).
+---
+
+## **AWS S3 Requester Pays Feature**  
+- **Concept:** Normally, the bucket owner pays for data transfer costs.  
+- **Requester Pays Option:** The **user accessing the data (requester) pays the retrieval cost.**  
+- **Use Case:** If an external user needs access to your S3 data, they bear the cost of data transfer.  
+
+#### **How to Enable Requester Pays in AWS Console:**  
+1. Go to **AWS S3 Console** → Select the **Bucket**.  
+2. Navigate to **Properties** → Scroll to **Requester Pays**.  
+3. Click **Edit**, select **Enable**, and save changes. 
   
 ---
 
