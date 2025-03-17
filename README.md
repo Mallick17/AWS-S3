@@ -178,7 +178,7 @@ This shows a significant cost reduction when using Glacier for archival data.
 - **Concept:** Normally, the bucket owner pays for data transfer costs.  
 - **Requester Pays Option:** The **user accessing the data (requester) pays the retrieval cost.**  
 - **Use Case:** If an external user needs access to your S3 data, they bear the cost of data transfer.
-
+- **Benefit:** The bucket owner only pays for **storage**, while the requester bears retrieval costs.
 ---
 
 
