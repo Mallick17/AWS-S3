@@ -9,7 +9,7 @@
    
    **Steps to Create the Bucket**:
    - **Region Selection**:
-     - S3 is a **regional service**. You need to choose the **region** where you want your bucket to be created (e.g., **Europe/Ireland**).
+     - S3 is a **regional service**. You need to choose the **region** where you want your bucket to be created (e.g., **Mumbai/Hyderabad**).
      - Choose the **nearest region** to your location for better performance.
    - **Unique Bucket Name**:
      - The bucket name must be **globally unique**. AWS will not allow you to create a bucket if the name is already taken.
@@ -200,7 +200,7 @@
    - Enter the following details:
      - **Access Key**: Obtain this from your AWS account under "Security Credentials."
      - **Secret Key**: This is generated alongside the Access Key.
-     - **Region**: Specify the region you are working in (e.g., `eu-central-1` for Frankfurt).
+     - **Region**: Specify the region you are working in (e.g., `ap-south-1` for Mumbai).
 
 3. **Verify Configuration**:
    - To ensure the AWS CLI is configured correctly, use the following command to check the current user and account:
