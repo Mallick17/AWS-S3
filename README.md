@@ -255,8 +255,6 @@ S3 bucket policies are **JSON-based access control rules** attached directly to 
 - Restrict object access to specific IP ranges.  
 - Enforce encryption requirements.  
 
----
-
 #### **1. Cross-Account S3 Bucket Access**  
 - Allowing users or roles from **one AWS account** to access resources (e.g., S3 buckets) in **another AWS account**.  
 
@@ -297,8 +295,6 @@ S3 bucket policies are **JSON-based access control rules** attached directly to 
    - **Reason**: The policy only grants `ListBucket`, not `GetObject`.  
 
 </details>
-
----
 
 #### **2. Making an S3 Bucket Public**  
 - An S3 bucket configured to allow **public internet access** to its objects or metadata.  
@@ -343,8 +339,6 @@ S3 bucket policies are **JSON-based access control rules** attached directly to 
 
 </details>
 
----
-
 #### **3. Pre-Signed URLs**
 Time-limited URLs that grant **temporary access** to private S3 objects. Generated using AWS credentials (e.g., IAM user/role).  
 
@@ -383,7 +377,7 @@ Time-limited URLs that grant **temporary access** to private S3 objects. Generat
      - After expiration, access is denied.  
    - **Use Case**: Ideal for sharing sensitive files temporarily (e.g., invoices, reports).  
 
----
+</details>
 
 ### **Key Takeaways**  
 - **Cross-Account Access**:  
@@ -398,9 +392,7 @@ Time-limited URLs that grant **temporary access** to private S3 objects. Generat
   - Time-bound access enhances security.  
   - No need to expose the entire bucket publicly.  
 
-</details>
 
----
 
 ### **Common Issues & Fixes**  
 1. **"Access Denied" for Objects**:  
