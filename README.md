@@ -164,7 +164,10 @@
 
 ---
 
-#### **Steps to Move Objects Using Tags in AWS CLI**  
+### **Steps to Move Objects Using Tags in AWS CLI**  
+#### **Scenario**  
+- **Account 1 (Source Bucket)** contains multiple objects.  
+- **Account 2 (Destination Bucket)** should receive only objects tagged as `ProjectX`. 
 1. **Apply Tags to Objects in the Source Bucket**  
    - Assign a tag like `ProjectX` to the required objects.  
 2. **List Objects with Specific Tags Using AWS CLI**  
