@@ -138,13 +138,6 @@
 
 ---
 
-### **Additional AWS CLI Resources**
-
-- For more AWS CLI commands and details, you can refer to the **blog post** that will contain all the commands.
-- Example resource URL for reference: [AWS CLI Commands Blog Post](#)
-
----
-
 ### **Summary of Key Operations**
 
 - **AWS CLI Setup**: Install, configure, and authenticate AWS CLI.
