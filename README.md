@@ -92,7 +92,7 @@
      - Select **S3** as the service.  
      - Specify permissions (e.g., `ListBucket`).  
      - Set resources to `*` (for simplicity, though best practice is to restrict to specific bucket ARNs).  
-     - Name the policy (e.g., `S3-List-Policy-Rahul-Dev`).  
+     - Name the policy (e.g., `S3-List-Policy-mallick-Dev`).  
 
 2. **Attach the Policy to the IAM User**:  
    - **Purpose**: Link the policy to the external user to enforce permissions.  
