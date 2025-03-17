@@ -62,7 +62,22 @@
 1. Go to **AWS S3 Console** → Select the **Bucket**.  
 2. Navigate to **Properties** → Scroll to **Requester Pays**.  
 3. Click **Edit**, select **Enable**, and save changes. 
-  
+
+### **How to Add Object Tags in AWS Console**  
+#### **Step-by-Step Guide**  
+1. **Access the AWS S3 Console**  
+   - Search for **S3** in the AWS Management Console.  
+   - Open the **S3 Dashboard** and select your **bucket**.  
+2. **Choose an Object to Tag**  
+   - Click on the **object** to open its properties.  
+3. **Add Tags**  
+   - Scroll to the **Tagging** section.  
+   - Click **Edit > Add Tag**.  
+   - Define a **Key-Value pair** (e.g., `Key: ObjectType, Value: PNG`).  
+4. **Save & Verify**  
+   - Click **Save Changes** and refresh the page.  
+   - The tag will now appear under the **Tagging** section.
+     
 ---
 
 # Accessing S3 using AWS CLI
@@ -146,6 +161,21 @@
      aws s3 ls s3://my-s3-bucket --recursive
      ```
    - This command will list not only the direct objects but also those inside subfolders.
+
+---
+
+#### **Steps to Move Objects Using Tags in AWS CLI**  
+1. **Apply Tags to Objects in the Source Bucket**  
+   - Assign a tag like `ProjectX` to the required objects.  
+2. **List Objects with Specific Tags Using AWS CLI**  
+   ```sh
+   aws s3api list-objects --bucket SourceBucket --query "Contents[?Tagging=='ProjectX']"
+   ```  
+3. **Copy Tagged Objects to Destination Bucket**  
+   ```sh
+   aws s3 cp s3://SourceBucket s3://DestinationBucket --recursive --exclude "*" --include "Tagging=='ProjectX'"
+   ```  
+4. **Verify the Object Transfer in the Destination Bucket**.
 
 ---
 
