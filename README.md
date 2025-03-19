@@ -56,10 +56,11 @@ With the default option (SSE-S3), Amazon S3 uses one of the strongest block ciph
    - This encryption method automatically encrypts any object you upload to this bucket. SSE-S3 uses AWS-managed keys to secure your data.
 
 **2. **Bucket Key****
+When KMS encryption is used to encrypt new objects in this bucket, the bucket key reduces encryption costs by lowering calls to AWS KMS. [Learn more](https://docs.aws.amazon.com/console/s3/bucket-key) 
    - **Enabled**: This is used to lower encryption costs when using AWS Key Management Service (KMS) encryption. It helps reduce the number of calls to KMS, which can save money.
 
 ### Intelligent-Tiering Archive Configurations
-Enable objects stored in the Intelligent-Tiering storage class to tier-down to the Archive Access tier or the Deep Archive Access tier which are optimized for objects that will be rarely accessed for long periods of time.
+Enable objects stored in the Intelligent-Tiering storage class to tier-down to the Archive Access tier or the Deep Archive Access tier which are optimized for objects that will be rarely accessed for long periods of time. Learn more 
    - **No archive configurations**: Intelligent-Tiering is a storage class in S3 that automatically moves objects to cheaper storage tiers based on their access patterns. Here, no objects are set to move to cheaper archive storage.
 
 ### Server access logging
