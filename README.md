@@ -60,7 +60,14 @@ When KMS encryption is used to encrypt new objects in this bucket, the bucket ke
    - **Enabled**: This is used to lower encryption costs when using AWS Key Management Service (KMS) encryption. It helps reduce the number of calls to KMS, which can save money.
 
 ### Intelligent-Tiering Archive Configurations
-Enable objects stored in the Intelligent-Tiering storage class to tier-down to the Archive Access tier or the Deep Archive Access tier which are optimized for objects that will be rarely accessed for long periods of time. Learn more 
+Enable objects stored in the Intelligent-Tiering storage class to tier-down to the Archive Access tier or the Deep Archive Access tier which are optimized for objects that will be rarely accessed for long periods of time. [Learn more](https://docs.aws.amazon.com/console/s3/intelligent-tiering) 
    - **No archive configurations**: Intelligent-Tiering is a storage class in S3 that automatically moves objects to cheaper storage tiers based on their access patterns. Here, no objects are set to move to cheaper archive storage.
 
 ### Server access logging
+Log requests for access to your bucket. Use CloudWatch to check the health of your server access logging. [Learn more](https://docs.aws.amazon.com/console/s3/cloudtrail-logging) 
+   - **Disabled**: Server access logging logs requests made to your bucket (who accessed the data, when, and from where). This can be useful for auditing and security. Since it’s disabled, access logs are not being recorded.
+
+### AWS CloudTrail data events
+- CloudTrail supports logging Amazon S3 object-level API operations, such as `GetObject`, `DeleteObject`, and `PutObject`. These events are called data events. CloudTrail data events provide information about object-level requests.
+- You can use the CloudTrail console to configure CloudTrail data events for objects in an S3 general purpose bucket or for objects in an S3 directory bucket. In the CloudTrail console, you can enable data events for all of the buckets of each bucket type in your account. For step-by-step instructions, see [Creating a trail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-a-trail-using-the-console-first-time.html?icmpid=docs_console_unmapped) in the AWS CloudTrail User Guide.
+- For general purpose buckets or directory buckets with high workloads, you can quickly generate thousands of logs in a short amount of time. We recommend that you create a lifecycle configuration for your AWS CloudTrail data event general purpose buckets. Configure the lifecycle configuration to periodically remove log files after the period of time that you need to audit them.
