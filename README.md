@@ -17,6 +17,7 @@ Objects are the fundamental entities stored in Amazon S3. You can use [Amazon S3
 
 ### Bucket Versioning
 Versioning is a means of keeping multiple variants of an object in the same bucket. You can use versioning to preserve, retrieve, and restore every version of every object stored in your Amazon S3 bucket. With versioning, you can easily recover from both unintended user actions and application failures. [Learn more](https://docs.aws.amazon.com/console/s3/enable-bucket-versioning)
+
 **1. **Bucket Versioning****
    - **Disabled**: Versioning is a feature that helps keep multiple versions of an object in a bucket. When it's enabled, you can recover deleted or overwritten files. In this case, versioning is turned off, so older versions of objects won’t be retained.
 
