@@ -28,4 +28,10 @@ An additional layer of security that requires multi-factor authentication for ch
 You can use bucket tags to track storage costs and organize buckets. [Learn more](https://docs.aws.amazon.com/console/s3/cost-allocation-tagging)
    - **No tags associated with this resource**: Tags are labels that help organize and track resources in AWS. For example, you might tag your bucket with a name like "Project-1" or "Cost-Center-123" for easier management. This bucket doesn’t have any tags.
 
-### 
+### Default encryption
+Server-side encryption is automatically applied to new objects stored in this bucket.
+**1. **Server-side encryption with Amazon S3 managed keys (SSE-S3)**:**
+   - This encryption method automatically encrypts any object you upload to this bucket. SSE-S3 uses AWS-managed keys to secure your data.
+
+**2. **Bucket Key****
+   - **Enabled**: This is used to lower encryption costs when using AWS Key Management Service (KMS) encryption. It helps reduce the number of calls to KMS, which can save money.
