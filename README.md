@@ -1,8 +1,8 @@
 # Bucket
-## Objects
+# Objects
 Objects are the fundamental entities stored in Amazon S3. You can use [Amazon S3 inventory](https://docs.aws.amazon.com/console/s3/inventory)  to get a list of all objects in your bucket. For others to access your objects, you’ll need to explicitly grant them permissions. [Learn more](https://docs.aws.amazon.com/console/s3/object-properties) 
 
-## Properties
+# Properties
 ### Bucket overview
 - This is a general section that gives you an overview of the settings for your Amazon S3 bucket. It shows where your bucket is located (AWS Region) and its name.
 
@@ -105,3 +105,78 @@ When enabled, the requester pays for requests and data transfer costs, and anony
 Use this bucket to host a website or redirect requests. [Learn more](https://docs.aws.amazon.com/console/s3/hostingstaticwebsite) 
    - **Enabled**: This bucket is set up to host a static website. A static website is one where the content (like HTML, CSS, images) doesn't change dynamically. 
      - **Bucket Website Endpoint**: The website hosted on this bucket is accessible at: [http://mallick-static-site.s3-website.ap-south-1.amazonaws.com](http://mallick-static-site.s3-website.ap-south-1.amazonaws.com)
+
+# Permissions
+### **Permissions Overview:**
+- **Access findings**: These are results provided by IAM (Identity and Access Management) external access analyzers that detect if your S3 resources are exposed to public access or to accounts other than yours. This helps you monitor potential security risks by identifying unwanted access.
+
+### **Block Public Access (Bucket Settings):**
+These settings help you manage public access to your S3 buckets and objects. Public access is typically granted via **Access Control Lists (ACLs)**, **bucket policies**, or **access point policies**. AWS provides various options to block public access to safeguard your data. These settings can be customized to allow certain levels of public access if required.
+
+- **Block all public access**: When turned on, this will block all public access to your S3 bucket and its objects, preventing any unauthenticated users from accessing them. AWS recommends enabling this setting unless you need some level of public access.
+  
+  You can adjust the individual public access block settings:
+  - **Block public access to buckets and objects granted through new ACLs**: Prevents the creation of new public ACLs that could grant access to your bucket or its objects.
+  - **Block public access to buckets and objects granted through any ACLs**: Ignores any existing ACLs that would grant public access, essentially disabling public access through ACLs.
+  - **Block public access through new bucket or access point policies**: Prevents the creation of new bucket or access point policies that grant public access.
+  - **Block public and cross-account access through any public policies**: Blocks any public or cross-account access granted by bucket or access point policies.
+
+### **Bucket Policy:**
+A **bucket policy** is a JSON-based policy document that defines who has access to the bucket and its contents. It is often used for more granular access control and applies to all objects within the bucket.
+
+- Example bucket policy provided:
+<details>
+   <summary>Example</summary>
+
+```json
+{
+    "Version": "2008-10-17",
+    "Id": "PolicyForCloudFrontPrivateContent",
+    "Statement": [
+        {
+            "Sid": "AllowCloudFrontServicePrincipal",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "cloudfront.amazonaws.com"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::cloudfronts-mallick-bucket-12345/*",
+            "Condition": {
+                "StringEquals": {
+                    "AWS:SourceArn": "arn:aws:cloudfront::339713104321:distribution/E1ZMLEKL2QVV8A"
+                }
+            }
+        }
+    ]
+}
+```
+
+</details>
+  - It allows **CloudFront** (a content delivery service) to **GetObject** from the bucket, but only if the request comes from a specific CloudFront distribution. This ensures that only requests originating from the specified distribution can access the bucket contents, preventing public access.
+
+### **Object Ownership:**
+Object ownership determines who controls the access permissions for objects within the bucket. It’s important for managing objects uploaded by external AWS accounts.
+
+- **Bucket owner enforced**: When enabled, the bucket owner has full control over all objects, even if they were uploaded by other AWS accounts. This setting disables the use of ACLs and ensures that only policies define who can access the objects.
+
+### **Access Control List (ACL):**
+ACLs allow you to grant permissions to specific AWS accounts or groups. They define who can read or write objects in the bucket.
+
+- **Bucket ACL**: This is the ACL for the bucket itself.
+  - **Grantee**: The entity (user or group) receiving the permissions.
+  - The **Bucket owner** is the account that owns the bucket, and you can assign **List** and **Write** permissions for the objects within the bucket.
+  
+- **Groups**:
+  - **Everyone (public access)**: The permissions are applied to everyone, i.e., the general public.
+  - **Authenticated users**: Any authenticated AWS user can access the objects.
+  - **S3 log delivery group**: Used for S3 logging, granting access for logging services to write logs into your bucket.
+
+In the **Bucket ACL**, you typically assign read and write permissions. For example:
+  - The bucket owner has full permissions to list and write to the bucket.
+  - "Everyone" (the public) has no permissions (since public access is blocked).
+  - **Authenticated users** group and **S3 log delivery group** might have restricted permissions depending on the configuration.
+
+### **Cross-Origin Resource Sharing (CORS):**
+CORS allows a web application running in one domain to access resources in a different domain. It’s used when client-side web applications interact with S3 from a different origin (e.g., a website hosted on `example.com` accessing assets stored in an S3 bucket).
+   - In your provided settings, no CORS configurations are listed, meaning the bucket doesn't allow cross-origin requests by default. If you want to enable this, you can define CORS rules in JSON format that specify what types of requests are allowed from which domains.
+
