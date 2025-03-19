@@ -68,6 +68,40 @@ Log requests for access to your bucket. Use CloudWatch to check the health of yo
    - **Disabled**: Server access logging logs requests made to your bucket (who accessed the data, when, and from where). This can be useful for auditing and security. Since it’s disabled, access logs are not being recorded.
 
 ### AWS CloudTrail data events
+Configure CloudTrail data events to log Amazon S3 object-level API operations in the CloudTrail console.
+
+<details>
+   <summary>Info</summary>
+   
 - CloudTrail supports logging Amazon S3 object-level API operations, such as `GetObject`, `DeleteObject`, and `PutObject`. These events are called data events. CloudTrail data events provide information about object-level requests.
 - You can use the CloudTrail console to configure CloudTrail data events for objects in an S3 general purpose bucket or for objects in an S3 directory bucket. In the CloudTrail console, you can enable data events for all of the buckets of each bucket type in your account. For step-by-step instructions, see [Creating a trail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-a-trail-using-the-console-first-time.html?icmpid=docs_console_unmapped) in the AWS CloudTrail User Guide.
 - For general purpose buckets or directory buckets with high workloads, you can quickly generate thousands of logs in a short amount of time. We recommend that you create a lifecycle configuration for your AWS CloudTrail data event general purpose buckets. Configure the lifecycle configuration to periodically remove log files after the period of time that you need to audit them.
+  
+</details>
+
+   - **No data events**: CloudTrail is a service that logs AWS API calls. For S3, it can log object-level API operations (like accessing, uploading, or deleting objects). There are no data events configured for this bucket.
+
+### Event notifications
+Send a notification when specific events occur in your bucket. [Learn more](https://docs.aws.amazon.com/console/s3/enable-event-notifications)
+   - **No event notifications**: Event notifications allow you to receive alerts when specific actions occur in your bucket, like an object being uploaded or deleted. Currently, no notifications are set up.
+
+### Amazon EventBridge
+For additional capabilities, use Amazon EventBridge to build event-driven applications at scale using S3 event notifications. [Learn more](https://docs.aws.amazon.com/console/s3/eventbridge-what-is)  or [see EventBridge pricing](https://aws.amazon.com/eventbridge/pricing) 
+   - **Off**: EventBridge is a service that enables you to set up event-driven applications based on S3 events. Currently, it is not set up to send notifications for this bucket.
+
+### Transfer acceleration
+Use an accelerated endpoint for faster data transfers. [Learn more](https://docs.aws.amazon.com/console/s3/transfer-acceleration) 
+   - **Disabled**: Transfer acceleration speeds up uploads to S3 by using a global network of edge locations. Since it’s disabled, transfers won’t be accelerated.
+
+### Object Lock
+Store objects using a write-once-read-many (WORM) model to help you prevent objects from being deleted or overwritten for a fixed amount of time or indefinitely. Object Lock works only in versioned buckets. [Learn more](https://docs.aws.amazon.com/console/s3/object-lock) 
+   - **Disabled**: Object Lock prevents an object from being overwritten or deleted for a specified period of time or indefinitely. This is useful for data retention requirements. Since it’s disabled, objects in the bucket can be deleted or changed.
+
+### Requester pays
+When enabled, the requester pays for requests and data transfer costs, and anonymous access to this bucket is disabled. [Learn more](https://docs.aws.amazon.com/console/s3/requesterpaysbucket) 
+   - **Disabled**: Normally, the bucket owner pays for requests and data transfer costs. With "Requester Pays" enabled, the person making the request (not the bucket owner) would pay the costs. Since it’s disabled, the owner is responsible for the costs.
+
+### Static website hosting
+Use this bucket to host a website or redirect requests. [Learn more](https://docs.aws.amazon.com/console/s3/hostingstaticwebsite) 
+   - **Enabled**: This bucket is set up to host a static website. A static website is one where the content (like HTML, CSS, images) doesn't change dynamically. 
+     - **Bucket Website Endpoint**: The website hosted on this bucket is accessible at: [http://mallick-static-site.s3-website.ap-south-1.amazonaws.com](http://mallick-static-site.s3-website.ap-south-1.amazonaws.com)
