@@ -135,6 +135,40 @@ aws s3 cp file.txt s3://my-bucket/ --sse aws:kms --sse-kms-key-id <key-id> --sse
 
 </details>
 
+### **4. In-Transit Encryption (Enforce HTTPS)**  
+- **What**: Ensures data is encrypted **during transfer** between users and S3.  
+- **Why**: Prevents eavesdropping (like sending a sealed letter instead of a postcard).  
+
+<details>
+  <summary>Steps to Create</summary>
+
+**Steps**:  
+1. **Edit Bucket Policy**:  
+   - Go to **S3 > Bucket > Permissions > Bucket Policy > Edit**.  
+   - Add a policy to **block HTTP** and **allow HTTPS**:  
+     ```json
+     {
+       "Version": "2012-10-17",
+       "Id": "EnforceHTTPS",
+       "Statement": [{
+         "Effect": "Deny",
+         "Principal": "*",
+         "Action": "s3:*",
+         "Resource": "arn:aws:s3:::your-bucket-name/*",
+         "Condition": { "Bool": { "aws:SecureTransport": "false" }}
+       }]
+     }
+     ```  
+2. **Test**:  
+   - Try accessing an object via HTTP (e.g., `http://bucket.s3.amazonaws.com/object`). You’ll see **Access Denied**.  
+
+**Example**:  
+- Without HTTPS, hackers could intercept data. This policy acts as a "bouncer" rejecting insecure requests.  
+
+</details>
+
+---
+
 ### **Summary Table:**
 
 | Encryption Type | Key Management | Security Level | Cost | Use Case |
@@ -144,6 +178,7 @@ aws s3 cp file.txt s3://my-bucket/ --sse aws:kms --sse-kms-key-id <key-id> --sse
 | **DSSE-KMS** | Two AWS KMS keys | Highest | Higher cost due to dual encryption | High-security environments, government compliance |
 
 ---
+
 
 ## Steps for securing Your S3 Bucket
 
