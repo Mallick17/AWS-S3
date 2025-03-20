@@ -1,4 +1,17 @@
-# **Amazon S3 Storage Classes
+# Amazon S3 Storage Classes
+## **AWS S3 Storage Classes**  
+
+| Storage Class | Use Case | Durability | Availability | Retrieval Time | Cost |
+|--------------|----------|------------|--------------|---------------|------|
+| **S3 Standard** | Frequently accessed data (e.g., dynamic web apps, databases) | 99.999999999% (11 nines) | 99.99% | Immediate | High |
+| **S3 Intelligent-Tiering** | Unpredictable access patterns | 11 nines | 99.9% | Immediate | Moderate |
+| **S3 Standard-IA (Infrequent Access)** | Infrequently accessed data, but requires fast retrieval | 11 nines | 99.9% | Immediate | Lower than Standard |
+| **S3 One Zone-IA** | Infrequently accessed data stored in a single Availability Zone | 11 nines | 99.5% | Immediate | Lower than Standard-IA |
+| **S3 Glacier Instant Retrieval** | Archive data with immediate access | 11 nines | 99.9% | Immediate | Very Low |
+| **S3 Glacier Flexible Retrieval** | Long-term archiving, minutes to hours retrieval | 11 nines | 99.9% | 1 minute to 12 hours | Very Low |
+| **S3 Glacier Deep Archive** | Cheapest option for archival data; retrieval takes hours | 11 nines | 99.9% | 12–48 hours | Lowest |
+
+---
 
 ## **1. Storage Classes for Frequently Accessed Objects**
 These storage classes are designed for performance-sensitive applications that require millisecond access time.
