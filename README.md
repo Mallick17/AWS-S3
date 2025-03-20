@@ -344,42 +344,7 @@ Time-limited URLs that grant **temporary access** to private S3 objects. Generat
 ## Securing Your S3 Bucket 
 Amazon S3 (Simple Storage Service) provides various encryption options to protect data at rest. The keys used for encryption in S3 determine how the encryption and decryption processes are managed. Below are the encryption types in detail:
 
-
-
-### **4. In-Transit Encryption (Enforce HTTPS)**  
-- **What**: Ensures data is encrypted **during transfer** between users and S3.  
-- **Why**: Prevents eavesdropping (like sending a sealed letter instead of a postcard).  
-
-<details>
-  <summary>Steps to Create</summary>
-
-**Steps**:  
-1. **Edit Bucket Policy**:  
-   - Go to **S3 > Bucket > Permissions > Bucket Policy > Edit**.  
-   - Add a policy to **block HTTP** and **allow HTTPS**:  
-     ```json
-     {
-       "Version": "2012-10-17",
-       "Id": "EnforceHTTPS",
-       "Statement": [{
-         "Effect": "Deny",
-         "Principal": "*",
-         "Action": "s3:*",
-         "Resource": "arn:aws:s3:::your-bucket-name/*",
-         "Condition": { "Bool": { "aws:SecureTransport": "false" }}
-       }]
-     }
-     ```  
-2. **Test**:  
-   - Try accessing an object via HTTP (e.g., `http://bucket.s3.amazonaws.com/object`). You’ll see **Access Denied**.  
-
-**Example**:  
-- Without HTTPS, hackers could intercept data. This policy acts as a "bouncer" rejecting insecure requests.  
-
-</details>
-
-
-### **5. Bucket Versioning**   
+### **1. Bucket Versioning**   
 - **What**: Saves **multiple versions** of an object (like a "time machine" for files).  
 - **Why**: Recovers accidentally deleted/overwritten files (e.g., restoring a previous report draft).  
 
@@ -400,7 +365,7 @@ Amazon S3 (Simple Storage Service) provides various encryption options to protec
 </details>
 
 
-### **6. Cross-Bucket Replication**  
+### **2. Cross-Bucket Replication**  
 - **What**: Automatically copies objects from a **source bucket** to a **destination bucket**.  
 - **Why**: Backup, compliance, or low-latency access in different regions (like having a photocopy in another location).  
 
