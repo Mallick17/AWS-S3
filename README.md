@@ -354,11 +354,27 @@ Time-limited URLs that grant **temporary access** to private S3 objects. Generat
 ---
 
 ## Securing Your S3 Bucket 
-### **1. SSE-S3 (Server-Side Encryption with Amazon S3-Managed Keys)**  
-- **What**: AWS automatically manages the encryption keys for your S3 bucket.  
-- **How It Works**: When you upload an object, S3 encrypts it using AES-256 encryption before storing it. AWS handles key management, rotation, and storage.  
-- **Why Use It**: Simple, no additional setup required. Ideal for users who don’t want to manage encryption keys.  
+Amazon S3 (Simple Storage Service) provides various encryption options to protect data at rest. The keys used for encryption in S3 determine how the encryption and decryption processes are managed. Below are the encryption types in detail:
 
+### **1. SSE-S3 (Server-Side Encryption with Amazon S3-Managed Keys)**  
+- **Overview:**  
+S3 automatically encrypts data using **AES-256** encryption before saving it to the disk and decrypts it when accessed. The encryption keys are managed by AWS, and users do not need to handle them.
+
+- **How It Works:**  
+  - When an object is uploaded, S3 automatically encrypts it using an encryption key generated and managed by Amazon S3.
+  - When the object is retrieved, S3 decrypts it automatically.
+
+- **Key Management:**  
+  - Amazon S3 manages the encryption keys internally.
+  - No additional configuration is required.
+
+- **Use Case:**  
+  - Suitable for users who need basic encryption without managing keys.
+
+- **Limitations:**  
+  - Users do not have control over encryption keys.
+  - No fine-grained access control over key usage.
+  
 <details>
   <summary>Steps to Create</summary>
   
@@ -381,12 +397,26 @@ Time-limited URLs that grant **temporary access** to private S3 objects. Generat
 
 
 ### **2. SSE-KMS (Server-Side Encryption with AWS Key Management Service)**   
-- **What**: You create and manage encryption keys using AWS KMS.  
-- **How It Works**:  
-  - You create a **KMS key** (symmetric or asymmetric).  
-  - When uploading an object, S3 uses your KMS key to encrypt the data.  
-  - You control access to the key via IAM policies and can audit key usage via AWS CloudTrail.  
-- **Why Use It**: Provides granular control over encryption keys and access. Ideal for compliance and sensitive data.  
+- **Overview:**  
+S3 encrypts objects using **AWS KMS (Key Management Service)**, allowing more control over encryption keys, including key rotation and access management.
+
+- **How It Works:**  
+  - When an object is uploaded, S3 encrypts it using a customer-managed KMS key.
+  - The key is stored in AWS KMS and requires permissions to use.
+  - AWS KMS logs all key usage in **AWS CloudTrail** for auditing.
+
+- **Key Management:**  
+  - Users can choose an **AWS-managed KMS key (default)** or a **customer-managed KMS key (CMK)**.
+  - Allows fine-grained access control with **IAM policies** and **key policies**.
+  - Supports key rotation.
+
+- **Use Case:**  
+  - Suitable for organizations that need better security control and audit logging.
+  - Required for compliance with security policies.
+
+- **Limitations:**  
+  - Additional cost for AWS KMS key usage.
+  - More complex than SSE-S3 due to key permissions.  
 
 <details>
   <summary>Steps to Create</summary>
@@ -428,8 +458,49 @@ Time-limited URLs that grant **temporary access** to private S3 objects. Generat
 - **SSE-S3**: Like a hotel safe where the hotel staff holds the master key. You trust them to keep your valuables secure.  
 - **SSE-KMS**: Like a personal safe in your home. You hold the key and decide who else can access it.  
 
+### **3.DSSE-KMS (Dual-Layer Server-Side Encryption with AWS KMS)**
+- **Overview:**  
+AWS provides an additional security layer with **dual-layer encryption**, where each object is encrypted **twice using two different KMS keys**.
 
-### **3. In-Transit Encryption (Enforce HTTPS)**  
+- **How It Works:**  
+  - The first layer of encryption is applied using an AWS KMS key.
+  - A second layer of encryption is applied using a separate KMS key.
+  - The decryption process reverses these two encryption layers.
+
+- **Key Management:**  
+  - Both encryption layers use AWS KMS.
+  - Users can define their own KMS keys for each layer.
+
+- **Use Case:**  
+  - Required for compliance with regulatory frameworks like **US government security standards**.
+  - Suitable for high-security environments needing multiple layers of encryption.
+
+- **Limitations:**  
+  - Higher cost due to the use of two KMS keys.
+  - Slightly increased processing overhead.
+
+<details>
+  <summary>Steps to Create</summary>
+  
+### **How to Enable DSSE-KMS:**  
+**Example using AWS CLI:**
+```sh
+aws s3 cp file.txt s3://my-bucket/ --sse aws:kms --sse-kms-key-id <key-id> --sse-dsse
+```
+
+---
+
+</details>
+
+### **Summary Table:**
+
+| Encryption Type | Key Management | Security Level | Cost | Use Case |
+|---------------|---------------|--------------|------|---------|
+| **SSE-S3** | Managed by S3 | Basic | No additional cost | General encryption without key management |
+| **SSE-KMS** | Managed by AWS KMS | High | AWS KMS cost applies | Compliance, logging, fine-grained access control |
+| **DSSE-KMS** | Two AWS KMS keys | Highest | Higher cost due to dual encryption | High-security environments, government compliance |
+
+### **4. In-Transit Encryption (Enforce HTTPS)**  
 - **What**: Ensures data is encrypted **during transfer** between users and S3.  
 - **Why**: Prevents eavesdropping (like sending a sealed letter instead of a postcard).  
 
@@ -462,7 +533,7 @@ Time-limited URLs that grant **temporary access** to private S3 objects. Generat
 </details>
 
 
-### **4. Bucket Versioning**   
+### **5. Bucket Versioning**   
 - **What**: Saves **multiple versions** of an object (like a "time machine" for files).  
 - **Why**: Recovers accidentally deleted/overwritten files (e.g., restoring a previous report draft).  
 
@@ -483,7 +554,7 @@ Time-limited URLs that grant **temporary access** to private S3 objects. Generat
 </details>
 
 
-### **5. Cross-Bucket Replication**  
+### **6. Cross-Bucket Replication**  
 - **What**: Automatically copies objects from a **source bucket** to a **destination bucket**.  
 - **Why**: Backup, compliance, or low-latency access in different regions (like having a photocopy in another location).  
 
