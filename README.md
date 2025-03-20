@@ -85,19 +85,7 @@
    - **Multiple Large Objects**: You can upload **multiple objects** of up to 5 TB each in your S3 bucket.
   
 ---
-## **AWS S3 Storage Classes**  
 
-| Storage Class | Use Case | Durability | Availability | Retrieval Time | Cost |
-|--------------|----------|------------|--------------|---------------|------|
-| **S3 Standard** | Frequently accessed data (e.g., dynamic web apps, databases) | 99.999999999% (11 nines) | 99.99% | Immediate | High |
-| **S3 Intelligent-Tiering** | Unpredictable access patterns | 11 nines | 99.9% | Immediate | Moderate |
-| **S3 Standard-IA (Infrequent Access)** | Infrequently accessed data, but requires fast retrieval | 11 nines | 99.9% | Immediate | Lower than Standard |
-| **S3 One Zone-IA** | Infrequently accessed data stored in a single Availability Zone | 11 nines | 99.5% | Immediate | Lower than Standard-IA |
-| **S3 Glacier Instant Retrieval** | Archive data with immediate access | 11 nines | 99.9% | Immediate | Very Low |
-| **S3 Glacier Flexible Retrieval** | Long-term archiving, minutes to hours retrieval | 11 nines | 99.9% | 1 minute to 12 hours | Very Low |
-| **S3 Glacier Deep Archive** | Cheapest option for archival data; retrieval takes hours | 11 nines | 99.9% | 12–48 hours | Lowest |
-
----
 
 ## **S3 Storage Pricing and Cost Optimization**  
 - **S3 Standard is the most expensive** because it supports frequent access and high durability.  
