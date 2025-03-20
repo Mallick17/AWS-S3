@@ -142,3 +142,96 @@ aws s3 cp file.txt s3://my-bucket/ --sse aws:kms --sse-kms-key-id <key-id> --sse
 | **SSE-S3** | Managed by S3 | Basic | No additional cost | General encryption without key management |
 | **SSE-KMS** | Managed by AWS KMS | High | AWS KMS cost applies | Compliance, logging, fine-grained access control |
 | **DSSE-KMS** | Two AWS KMS keys | Highest | Higher cost due to dual encryption | High-security environments, government compliance |
+
+---
+
+## Steps for securing Your S3 Bucket
+
+### Overview
+1. **S3 Server-Side Encryption (SSE-S3)**
+2. **S3 Encryption Using AWS KMS Key (SSE-KMS)**
+3. **In-Transit Encryption (HTTPS Enforcement)**
+
+---
+
+## 1. S3 Server-Side Encryption (SSE-S3)
+
+### **Concept**
+SSE-S3 is the default encryption provided by AWS S3, which encrypts all objects stored in a bucket using AES-256 encryption.
+
+### **Enabling SSE-S3 for an Existing Bucket**
+1. Navigate to the **AWS S3 Dashboard**.
+2. Select the bucket you want to enable encryption for.
+3. Click on the **Properties** tab.
+4. Locate **Default Encryption** and click **Edit**.
+5. Choose **Server-side encryption with Amazon S3-managed keys (SSE-S3)**.
+6. Click **Save Changes**.
+
+### **Enabling SSE-S3 During Bucket Creation**
+1. Go to the **AWS S3 Dashboard**.
+2. Click **Create bucket**.
+3. Provide a **Bucket name** and other details.
+4. Scroll down to **Default encryption**.
+5. Select **SSE-S3**.
+6. Click **Create bucket**.
+
+---
+
+## 2. S3 Encryption Using AWS KMS Key (SSE-KMS)
+
+### **Concept**
+SSE-KMS allows you to use your own **AWS Key Management Service (KMS) keys** for encrypting objects in S3.
+
+### **Enabling SSE-KMS for an Existing Bucket**
+1. Navigate to **AWS S3 Dashboard**.
+2. Select the bucket.
+3. Click on the **Properties** tab.
+4. Find **Default Encryption** and click **Edit**.
+5. Select **Server-side encryption with AWS KMS key (SSE-KMS)**.
+6. If you have an existing KMS key, select it; otherwise, click **Create KMS key**.
+7. Click **Save Changes**.
+
+### **Creating a New KMS Key**
+1. Navigate to **AWS KMS**.
+2. Click **Create key**.
+3. Select **Symmetric key** and click **Next**.
+4. Define a **Key alias** and add key administrators.
+5. Click **Create key**.
+6. Copy the **Key ARN** and paste it into the S3 bucket’s encryption settings.
+
+---
+
+## 3. In-Transit Encryption (HTTPS Enforcement)
+
+### **Concept**
+In-transit encryption ensures that data transferred between clients and S3 is encrypted using HTTPS instead of HTTP.
+
+### **Enforcing HTTPS in S3 Bucket Policy**
+1. Go to the **AWS S3 Dashboard**.
+2. Select your bucket and navigate to **Permissions**.
+3. Click **Edit** under **Bucket policy**.
+4. Add the following policy:
+   ```json
+   {
+       "Id": "EnforceHTTPS",
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "DenyHTTP",
+               "Effect": "Deny",
+               "Principal": "*",
+               "Action": "s3:GetObject",
+               "Resource": "arn:aws:s3:::your-bucket-name/*",
+               "Condition": {
+                   "Bool": {
+                       "aws:SecureTransport": "false"
+                   }
+               }
+           }
+       ]
+   }
+   ```
+5. Click **Save Changes**.
+6. Now, objects can only be accessed using HTTPS.
+
+---
