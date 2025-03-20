@@ -147,12 +147,8 @@ aws s3 cp file.txt s3://my-bucket/ --sse aws:kms --sse-kms-key-id <key-id> --sse
 
 ## Steps for securing Your S3 Bucket
 
-### Overview
-1. **S3 Server-Side Encryption (SSE-S3)**
-2. **S3 Encryption Using AWS KMS Key (SSE-KMS)**
-3. **In-Transit Encryption (HTTPS Enforcement)**
-
----
+<details>
+  <summary>1. S3 Server-Side Encryption (SSE-S3)</summary>
 
 ## 1. S3 Server-Side Encryption (SSE-S3)
 
@@ -177,6 +173,11 @@ SSE-S3 is the default encryption provided by AWS S3, which encrypts all objects 
 
 ---
 
+</details>
+
+<details>
+  <summary>2. S3 Encryption Using AWS KMS Key (SSE-KMS)</summary>
+
 ## 2. S3 Encryption Using AWS KMS Key (SSE-KMS)
 
 ### **Concept**
@@ -200,6 +201,11 @@ SSE-KMS allows you to use your own **AWS Key Management Service (KMS) keys** for
 6. Copy the **Key ARN** and paste it into the S3 bucket’s encryption settings.
 
 ---
+
+</details>
+
+<details>
+  <summary>3. In-Transit Encryption (HTTPS Enforcement)</summary>
 
 ## 3. In-Transit Encryption (HTTPS Enforcement)
 
@@ -235,3 +241,7 @@ In-transit encryption ensures that data transferred between clients and S3 is en
 6. Now, objects can only be accessed using HTTPS.
 
 ---
+
+</details>
+
+
