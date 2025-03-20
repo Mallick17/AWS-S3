@@ -99,17 +99,28 @@ These classes provide the lowest-cost storage for long-term data retention.
 ---
 
 ## **Key Differences: Amazon S3 Storage Classes**
-| Storage Class        | Availability | Durability | Retrieval Time | Retrieval Fee | Use Case |
-|----------------------|-------------|------------|----------------|---------------|----------|
-| **S3 Standard** | 99.99% | 99.999999999% | Milliseconds | No | Frequently accessed data |
-| **S3 Express One Zone** | Single AZ | 99.999999999% | Milliseconds | No | Low-latency applications |
-| **S3 Intelligent-Tiering** | 99.9% | 99.999999999% | Milliseconds | No | Unknown access patterns |
-| **S3 Standard-IA** | 99.9% | 99.999999999% | Milliseconds | Yes | Infrequent but long-lived data |
-| **S3 One Zone-IA** | 99.5% | 99.999999999% | Milliseconds | Yes | Secondary backups, easily reproducible data |
-| **S3 Glacier Instant Retrieval** | 99.9% | 99.999999999% | Milliseconds | Yes | Archival data with real-time access |
-| **S3 Glacier Flexible Retrieval** | 99.9% | 99.999999999% | Minutes to hours | Yes | Backup and disaster recovery |
-| **S3 Glacier Deep Archive** | 99.9% | 99.999999999% | 12–48 hours | Yes | Long-term cold storage |
-| **S3 Outposts** | On-premises | 99.999999999% | Milliseconds | No | Data residency and local processing |
+
+| **Storage Class** | **Durability & Availability** | **Best For** | **Cost Considerations** | **Retrieval Time** | **Minimum Storage Duration** | **Use Case Example** |
+|-------------------|-----------------------------|--------------|------------------------|------------------|-----------------------|------------------|
+| **S3 Standard (STANDARD)** _(Default Storage Class)_ | 99.999999999% durability, 99.99% availability | Frequently accessed data, general-purpose storage | Higher storage cost, no retrieval fee | Milliseconds | None | Frequently accessed business-critical data, transactional workloads |
+| **S3 Express One Zone (EXPRESS_ONEZONE)** | 99.999999999% durability, 99.9% availability (Single AZ) | Latency-sensitive workloads, real-time applications | 50% lower than Standard, but stored in a single AZ | Milliseconds (10x faster than Standard) | None | Low-latency workloads like machine learning inference |
+| **S3 Intelligent-Tiering (INTELLIGENT_TIERING)** | 99.999999999% durability, 99.9% availability | Data with unpredictable access patterns | Automatically moves data to cost-effective tiers, no retrieval fee | Milliseconds | None | Dynamic storage needs, such as logs or analytics data |
+| **S3 Standard-IA (STANDARD_IA)** | 99.999999999% durability, 99.9% availability | Infrequently accessed data but still needs fast retrieval | Lower storage cost, per GB retrieval fee | Milliseconds | 30 days | Backups, disaster recovery, infrequent data retrieval |
+| **S3 One Zone-IA (ONEZONE_IA)** | 99.999999999% durability, 99.5% availability (Single AZ) | Infrequent data that does not require multi-AZ resiliency | Lower cost than Standard-IA, stored in a single AZ | Milliseconds | 30 days | Secondary backups, non-critical logs |
+| **S3 Glacier Instant Retrieval (GLACIER_IR)** | 99.999999999% durability, 99.9% availability | Archive data that requires immediate access | Lower than IA, per GB retrieval fee | Milliseconds | 90 days | Legal documents, archived medical records with quick access |
+| **S3 Glacier Flexible Retrieval (GLACIER)** | 99.999999999% durability, 99.99% availability | Cold data storage, infrequently accessed | Low storage cost, retrieval fees apply | Minutes to hours | 90 days | Long-term backups, historical data |
+| **S3 Glacier Deep Archive (DEEP_ARCHIVE)** | 99.999999999% durability, 99.99% availability | Long-term archival storage, rarely accessed | Lowest storage cost, retrieval fees apply | Hours (12-48 hours) | 180 days | Compliance archives, regulatory storage, large media libraries |
+| **S3 Outposts (OUTPOSTS)** | 99.999999999% durability, depends on Outposts' availability | On-premises AWS S3 storage for compliance | Varies based on configuration | Milliseconds | None | Local data storage for hybrid cloud applications |
+
+---
+
+### **Key Takeaways**
+1. **Frequent Access Needs →** **S3 Standard** (default)  
+2. **Low Latency →** **S3 Express One Zone**  
+3. **Cost Optimization for Dynamic Workloads →** **S3 Intelligent-Tiering**  
+4. **Infrequent Access with Quick Retrieval →** **S3 Standard-IA / One Zone-IA**  
+5. **Archival Storage →** **Glacier & Deep Archive (cheapest, but slowest retrieval)**  
+6. **On-Premises Hybrid Storage →** **S3 Outposts**  
 
 ---
 
