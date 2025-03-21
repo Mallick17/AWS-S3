@@ -139,6 +139,11 @@ aws s3 cp file.txt s3://my-bucket/ --sse aws:kms --sse-kms-key-id <key-id> --sse
 - **What**: Ensures data is encrypted **during transfer** between users and S3.  
 - **Why**: Prevents eavesdropping (like sending a sealed letter instead of a postcard).  
 
+### **5. SSE-C (Customer-Managed Keys)**
+- Users provide their **own encryption keys**.
+- AWS does **not** store these keys.
+- **Best for**: When companies want to manage their encryption keys externally.
+
 <details>
   <summary>Steps to Create</summary>
 
