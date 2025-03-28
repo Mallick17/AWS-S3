@@ -149,8 +149,6 @@ Here’s the cost calculation for storing **1000 GB per month** in each S3 stora
 | S3 Glacier | **\$4.00** |
 | S3 Glacier Deep Archive | **\$0.99** |
 
-Would you like to include retrieval costs or other fees in the calculation?
-
 ---
 ## **Summary & Recommendations**
 1. **Use S3 Standard** for frequently accessed data.
