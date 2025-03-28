@@ -138,48 +138,6 @@ These classes provide the lowest-cost storage for long-term data retention.
 ---
 
 Here’s the cost calculation for storing **1000 GB per month** in each S3 storage class:
-
-1. **S3 Standard**:  
-   \[
-   1000 \times 0.023 = \mathbf{\$23.00}
-   \]
-
-2. **S3 Intelligent-Tiering**:  
-   - Frequent Access:  
-     \[
-     1000 \times 0.023 = \mathbf{\$23.00}
-     \]
-   - Infrequent Access:  
-     \[
-     1000 \times 0.0125 = \mathbf{\$12.50}
-     \]
-   - Monitoring cost (assuming 100,000 objects, each 10 MB in size):  
-     \[
-     \left(\frac{1000 \times 1024}{10}\right) \times 0.0025 / 10000 = \mathbf{\$0.256}
-     \]
-   - **Total (Frequent Access + Monitoring)**: **\$23.256**  
-   - **Total (Infrequent Access + Monitoring)**: **\$12.756**
-
-3. **S3 Standard-IA** (Assuming objects are ≥ 128 KB):  
-   \[
-   1000 \times 0.0125 = \mathbf{\$12.50}
-   \]
-
-4. **S3 One Zone-IA**:  
-   \[
-   1000 \times 0.01 = \mathbf{\$10.00}
-   \]
-
-5. **S3 Glacier**:  
-   \[
-   1000 \times 0.004 = \mathbf{\$4.00}
-   \]
-
-6. **S3 Glacier Deep Archive**:  
-   \[
-   1000 \times 0.00099 = \mathbf{\$0.99}
-   \]
-
 ### Summary:
 | Storage Class | Cost (1000 GB) |
 |--------------|--------------|
