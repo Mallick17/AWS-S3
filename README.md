@@ -40,10 +40,9 @@ In this approach, we create IAM users for each senior manager and attach individ
    - Create separate policies for each department, granting access to the specific S3 prefix.  
    - Example policies:
 
-     **HR Policy (for Alice)**:
-     
+   
 <details>
-  <summary>Policies Created</summary>
+  <summary>HR Policy (for Alice)</summary>
   
      ```json
      {
@@ -59,10 +58,9 @@ In this approach, we create IAM users for each senior manager and attach individ
      ```
 </details>
 
-     **Finance Policy (for Bob)**:
      
 <details>
-  <summary>Policies Created</summary>
+  <summary>Finance Policy (for Bob)</summary>
   
      ```json
      {
@@ -76,12 +74,12 @@ In this approach, we create IAM users for each senior manager and attach individ
          ]
      }
      ```
+     
 </details>
 
-     **Engineering Policy (for Charlie)**:
      
 <details>
-  <summary>Policies Created</summary>
+  <summary>Engineering Policy (for Charlie)</summary>
      
      ```json
      {
@@ -95,6 +93,7 @@ In this approach, we create IAM users for each senior manager and attach individ
          ]
      }
      ```
+     
 </details>
 
 
