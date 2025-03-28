@@ -1,4 +1,5 @@
 ## **1. Bucket Policies**
+
 Bucket policies are JSON-based access policy documents that you attach directly to an S3 bucket. They define what actions are allowed or denied for which principals (users, accounts, roles), under what conditions.
 
 - **Scope**: Bucket-level (not object-level)
@@ -16,6 +17,10 @@ Bucket policies are JSON-based access policy documents that you attach directly 
 ---
 
 ## **2. Adding a Bucket Policy**
+
+<details>
+  <summary>Policies Created</summary>
+  
 You can add a bucket policy via:
 - **AWS Management Console** (S3 > Bucket > Permissions > Bucket Policy)
 - **AWS CLI**
@@ -24,11 +29,16 @@ You can add a bucket policy via:
   ```
 - **AWS SDKs**
 
+</details>
+
 ---
 
 ## **3. Controlling VPC Access**
 You can restrict bucket access only to requests coming from a specific **VPC endpoint** using the `aws:SourceVpce` condition key.
 
+<details>
+  <summary>Policies Created</summary>
+  
 **Example Bucket Policy to allow access only via a specific VPC endpoint:**
 ```json
 {
@@ -50,9 +60,14 @@ You can restrict bucket access only to requests coming from a specific **VPC end
 }
 ```
 
+</details>
+
 ---
 
 ## **4. Bucket Policy Examples**
+
+<details>
+  <summary>Policies Created</summary>
 
 - **Allow Read Access to Everyone (public):**
 ```json
@@ -94,6 +109,8 @@ You can restrict bucket access only to requests coming from a specific **VPC end
 }
 ```
 
+</details>
+
 ---
 
 ## **5. Condition Key Examples**
@@ -124,6 +141,9 @@ These are **IAM policies** attached to **users, groups, or roles**. They define 
 
 ## **7. Walkthroughs Using Policies**
 
+<details>
+  <summary>Policies Created</summary>
+  
 - **Scenario 1: Allow user to upload objects only with encryption**
 ```json
 {
@@ -147,9 +167,15 @@ These are **IAM policies** attached to **users, groups, or roles**. They define 
 }
 ```
 
+</details>
+
 ---
 
 ## **8. Using Service-Linked Roles for Amazon S3 Storage Lens**
+
+<details>
+  <summary>Policies Created</summary>
+  
 Amazon S3 Storage Lens uses **service-linked roles** to collect and analyze storage metrics across your buckets.
 
 - Created automatically when you enable Storage Lens.
@@ -157,6 +183,8 @@ Amazon S3 Storage Lens uses **service-linked roles** to collect and analyze stor
 - It includes the necessary permissions to read bucket metrics and deliver reports.
 
 You can verify it in IAM > Roles.
+
+</details>
 
 ---
 
@@ -192,6 +220,9 @@ These are pre-created, maintained, and updated by AWS. They provide common permi
 
 ##  **Hands-On Lab: Secure S3 Bucket Access**
 
+<details>
+  <summary>Policies Created</summary>
+  
 ### **Goal**:  
 Create an S3 bucket with restricted access, only allowing:
 - IAM user to upload files (UploaderUser)
@@ -284,6 +315,8 @@ Uploader must set this during upload:
 ```bash
 aws s3 cp myfile.txt s3://my-secure-bucket/ --sse AES256
 ```
+
+</details>
 
 ---
 
