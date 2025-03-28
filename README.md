@@ -41,6 +41,10 @@ In this approach, we create IAM users for each senior manager and attach individ
    - Example policies:
 
      **HR Policy (for Alice)**:
+     
+<details>
+  <summary>Policies Created</summary>
+  
      ```json
      {
          "Version": "2012-10-17",
@@ -53,8 +57,13 @@ In this approach, we create IAM users for each senior manager and attach individ
          ]
      }
      ```
+</details>
 
      **Finance Policy (for Bob)**:
+     
+<details>
+  <summary>Policies Created</summary>
+  
      ```json
      {
          "Version": "2012-10-17",
@@ -67,8 +76,13 @@ In this approach, we create IAM users for each senior manager and attach individ
          ]
      }
      ```
+</details>
 
      **Engineering Policy (for Charlie)**:
+     
+<details>
+  <summary>Policies Created</summary>
+     
      ```json
      {
          "Version": "2012-10-17",
@@ -81,6 +95,8 @@ In this approach, we create IAM users for each senior manager and attach individ
          ]
      }
      ```
+</details>
+
 
 3. **Attach Policies**:  
    - Attach the HR policy to Alice’s IAM user, the Finance policy to Bob’s IAM user, and the Engineering policy to Charlie’s IAM user.
