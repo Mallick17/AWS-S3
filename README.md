@@ -3,9 +3,19 @@
 - 1st Create a folder inside a bucket and
 - 2nd Create a folder and add some files
 - 3rd Copied 2 files `dump.py , user.env` files from the local folder to s3 bucket folder
-- 4th modified the `dump.py` file and didnt change the `uesr.env` file and gonna try the sync command and there are few other files in the local folder which isnt synced.
-- 
 
+<img width="1204" height="321" alt="image" src="https://github.com/user-attachments/assets/04bb6965-ea7a-4352-af84-58c9e36eb437" />
+
+- 4th modified the `dump.py` file and didnt change the `uesr.env` file and gonna try the sync command and there are few other files in the local folder which isnt synced.
+```shell
+pwd
+/Users/gyanaranjan.mallick/Downloads/testing/test
+
+aws s3 sync . s3://elasticbeanstalk-ap-south-1-508351649560/sync-commands-test/
+upload: ./dump.py to s3://elasticbeanstalk-ap-south-1-508351649560/sync-commands-test/dump.py
+upload: ./dump1.py to s3://elasticbeanstalk-ap-south-1-508351649560/sync-commands-test/dump1.py
+upload: ./user-laravel.env to s3://elasticbeanstalk-ap-south-1-508351649560/sync-commands-test/user-laravel.env
+```
 
 
 
