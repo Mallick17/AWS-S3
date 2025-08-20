@@ -20,21 +20,19 @@ upload: ./user-laravel.env to s3://elasticbeanstalk-ap-south-1-508351649560/sync
 
 - `aws s3 sync . s3://elasticbeanstalk-ap-south-1-508351649560/sync-commands-test/` it overwrites the modified files and adds the misisng files which is not present in s3 bucket after comparing the local folder.
 
-Absolutely! Let’s clarify **why `aws s3 sync` cannot avoid overwriting modified files**, and then integrate that explanation into a clean, cohesive documentation.
-
 ---
 
 ## Why `aws s3 sync` Can’t Avoid Overwriting Modified Local Files
 
-* **Designed as a one-way sync**, `aws s3 sync` prioritizes the source (local) version. If a local file is newer or different, it *always* overwrites the existing object in S3 ([Stack Overflow][1]).
+* **Designed as a one-way sync**, `aws s3 sync` prioritizes the source (local) version. If a local file is newer or different, it *always* overwrites the existing object in S3.
 
 * It determines whether to upload primarily based on three criteria:
 
   1. The local file doesn’t exist in S3.
   2. The file size differs.
-  3. The local file is newer than the S3 version (based on timestamps) ([Zenduty Community][2], [awsfundamentals.com][3]).
+  3. The local file is newer than the S3 version (based on timestamps).
 
-* **There is no option** in `aws s3 sync` to say “skip overwriting if the file exists, even if it’s different.” The CLI offers no flag like `--ignore-existing` or `--no-overwrite` for `sync` ([Stack Overflow][1]).
+* **There is no option** in `aws s3 sync` to say “skip overwriting if the file exists, even if it’s different.” The CLI offers no flag like `--ignore-existing` or `--no-overwrite` for `sync` .
 
 In short—**if `sync` sees a difference, it will overwrite**, with *no built-in method to change that behavior*.
 
@@ -112,9 +110,9 @@ In short—**if `sync` sees a difference, it will overwrite**, with *no built-in
 
 ### Why `sync` Overwrites Modified Local Files
 
-* `aws s3 sync` is built to ensure the destination mirrors the source; if a local file is different (by size or timestamp), it assumes the local copy is authoritative and deliberately overwrites ([Zenduty Community][2], [awsfundamentals.com][3]).
+* `aws s3 sync` is built to ensure the destination mirrors the source; if a local file is different (by size or timestamp), it assumes the local copy is authoritative and deliberately overwrites.
 
-* The CLI offers no switch to reverse that logic (e.g., “never overwrite”), meaning **you cannot use `sync` if you want to only upload missing files and leave modified ones untouched** ([Stack Overflow][1]).
+* The CLI offers no switch to reverse that logic (e.g., “never overwrite”), meaning **you cannot use `sync` if you want to only upload missing files and leave modified ones untouched** .
 
 ---
 
