@@ -2,8 +2,9 @@
 ### S3 CLI Sync Commands
 - 1st Create a folder inside a bucket and
 - 2nd Create a folder and add some files
-- 3rd Copy few files from the local folder to s3 bucket folder
-- 4th
+- 3rd Copied 2 files `dump.py , user.env` files from the local folder to s3 bucket folder
+- 4th modified the `dump.py` file and didnt change the `uesr.env` file and tried the sync command and there are few other files in the local folder which isnt synced.
+- 
 
 
 
