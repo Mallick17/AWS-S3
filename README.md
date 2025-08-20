@@ -1,7 +1,7 @@
 # AWS S3 CLI
 ### S3 CLI Sync Commands
-- 1st Create a folder inside a bucket and
-- 2nd Create a folder and add some files
+- 1st Create a folder inside a bucket in s3 and
+- 2nd Create a folder and add some files in the local system directory
 - 3rd Copied 2 files `dump.py , user.env` files from the local folder to s3 bucket folder
 
 <img width="1204" height="321" alt="image" src="https://github.com/user-attachments/assets/04bb6965-ea7a-4352-af84-58c9e36eb437" />
