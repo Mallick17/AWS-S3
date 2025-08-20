@@ -16,7 +16,10 @@ upload: ./dump.py to s3://elasticbeanstalk-ap-south-1-508351649560/sync-commands
 upload: ./dump1.py to s3://elasticbeanstalk-ap-south-1-508351649560/sync-commands-test/dump1.py
 upload: ./user-laravel.env to s3://elasticbeanstalk-ap-south-1-508351649560/sync-commands-test/user-laravel.env
 ```
+<img width="1189" height="392" alt="image" src="https://github.com/user-attachments/assets/f15b490c-ba8f-49e2-8caa-6c8bac014251" />
 
+- `aws s3 sync . s3://elasticbeanstalk-ap-south-1-508351649560/sync-commands-test/` it overwrites the modified files and adds the misisng files which is not present in s3 bucket after comparing the local folder.
+- 
 
 
 
