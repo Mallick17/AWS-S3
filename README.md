@@ -1,3 +1,18 @@
+# AWS S3 CLI
+### S3 CLI Sync Commands
+- 1st Create a folder inside a bucket and
+- 2nd Create a folder and add some files
+- 3rd Copy few files from the local folder to s3 bucket folder
+- 4th
+
+
+
+
+
+
+
+
+
 # AWS S3 (Simple Storage Service)
 
 - **AWS S3 Overview**:
